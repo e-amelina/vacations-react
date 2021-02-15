@@ -1,0 +1,35 @@
+.calendarBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: transform .3s;
+    &:hover {
+        transform: scale(1.6);
+    }
+}
+
+.prev-btn {
+    background: url(../images/leftArrow.svg) no-repeat center;
+}
+
+.next-btn {
+    background: url(../images/rightArrow.svg) no-repeat center;
+}
+
+.display-date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    text-align: center;
+    min-width: 120px;
+}
