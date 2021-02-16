@@ -1,0 +1,38 @@
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+  
+    thead {
+      tr {
+        height: 64px;
+  
+        th {
+          &.cell:hover {
+            background: #fff;
+          }
+  
+          &.weekend:hover {
+            background: #f0f0f0;
+          }
+  
+          &.cell-sum:hover {
+            background: #f3f3f3;
+          }
+        }
+      }
+    }
+  }
+  
+  .cell {
+    border: 1px solid rgba(126, 126, 126, 0.3);
+    width: 34px;
+    height: 33px;
+    transition: background-color 0.3s;
+  
+    &:hover {
+      background: rgba(155, 153, 255, 0.1);
+      border-radius: 2px;
+      cursor: pointer;
+    }
+  }
+  

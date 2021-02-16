@@ -1,0 +1,38 @@
+.cell {
+    span {
+      display: block;
+      position: relative;
+      z-index: 4;
+  
+      &.day {
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 18px;
+      }
+  
+      &.date {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 21px;
+      }
+    }
+  
+    &-sum {
+      font-weight: normal;
+      font-size: 12px;
+      background: #f3f3f3;
+  
+      &:hover {
+        background: #f3f3f3;
+      }
+    }
+}
+
+.hidden {
+  display: none;
+}
+
+.weekend {
+  background: #f0f0f0;
+}
+  
