@@ -11,9 +11,6 @@ export default class TableBody extends Component {
 
     renderCells(rowNumber, teamNumber) {
         const cells = [];
-        this.month = Number.parseInt(this.props.currentDate.toLocaleDateString("en-US", { month: "numeric" }), 10);
-        this.year = Number.parseInt(this.props.currentDate.toLocaleDateString("en-US", { year: "numeric" }), 10);
-        this.countDays = Utils.getDaysInMonth(this.month, this.year);
 
         for(let cellNumber = 0; cellNumber < this.props.size - 1; cellNumber++) {
             const date = new Date(this.year, this.month - 1, cellNumber + 1);
@@ -53,6 +50,7 @@ export default class TableBody extends Component {
     }
 
     createTeamInformation(teamNumber) {
+
         return (
             <td className = "cell team">
                 <div className = "border"></div>
@@ -61,6 +59,7 @@ export default class TableBody extends Component {
                         {this.state.teams[teamNumber].name}
                     </span>
                     <span className = "team__count-members">
+                    {this.state.teams[teamNumber].members.length}
                     </span>
                     <span className = "team__percentage-absent">{this.state.teams[teamNumber].percentageOfAbsent[this.month]}%</span>
                     <span className = "team__btn--hide" onClick = {(event) => {
@@ -102,6 +101,9 @@ export default class TableBody extends Component {
     }
 
     render() {
+        this.month = Number.parseInt(this.props.currentDate.toLocaleDateString("en-US", { month: "numeric" }), 10);
+        this.year = Number.parseInt(this.props.currentDate.toLocaleDateString("en-US", { year: "numeric" }), 10);
+        this.countDays = Utils.getDaysInMonth(this.month, this.year);
         const rows = [];
 
         for(let teamNumber = 0; teamNumber < this.state.teams.length; teamNumber++ ) {
