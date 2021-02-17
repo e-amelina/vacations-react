@@ -1,5 +1,5 @@
 import './styles/index.scss';
-import Navigation from "./Navigation/Navigation";
+import { Navigation } from './components/Navigation';
 import Table from './components/Table';
 import { Component } from 'react';
 
