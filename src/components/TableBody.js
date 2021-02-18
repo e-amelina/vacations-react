@@ -9,39 +9,90 @@ export default class TableBody extends Component {
         this.state = data;
     }
 
+    getPaidDays(vacations) {
+        const paidDays = [];
+        vacations.forEach((vacation) => {
+          paidDays.push({
+            startDay: Number.parseInt(vacation.startDate.split(".")[0], 10),
+            month: Number.parseInt(vacation.startDate.split(".")[1], 10),
+            endDay: Number.parseInt(vacation.endDate.split(".")[0], 10),
+            type: vacation.type,
+          });
+        });
+    
+        return paidDays;
+    }
+
     renderCells(rowNumber, teamNumber) {
         const cells = [];
+        let paidDays = [];
+
+        if(rowNumber) {
+            paidDays = this.getPaidDays(this.state.teams[teamNumber].members[rowNumber - 1].vacations);
+        }
 
         for(let cellNumber = 0; cellNumber < this.props.size - 1; cellNumber++) {
             const date = new Date(this.year, this.month - 1, cellNumber + 1);
+
+            let className = "cell ";
+
             if(cellNumber === this.props.size - 2) {
-                cells.push(<td className = "cell cell-sum" key = {cellNumber}>
+                className += "cell-sum ";
+                cells.push(<td className = {className}>
                     {(!rowNumber) && <div className = "border-top border-bottom"></div>}
                     {(rowNumber === this.state.teams[teamNumber].members.length) && <div className = "border-bottom"></div>}
+                    {this.addPaidDays(cellNumber, paidDays)}
                     </td>);
             }
             if (Utils.hiddenDays(cellNumber + 1, this.countDays, this.props.size)) {
-                cells.push(<td className = "cell hidden" key = {cellNumber}>
+                className += "hidden "
+                cells.push(<td className = {className}>
                     {(!rowNumber) && <div className = "border-top border-bottom"></div>}
                     {(rowNumber === this.state.teams[teamNumber].members.length) && <div className = "border-bottom"></div>}
+                    {this.addPaidDays(cellNumber, paidDays)}
                     </td>);
             } else {
                 const weekdayName = date.toLocaleDateString("en-US", { weekday: "short" });
                 if (Utils.isWeekend(weekdayName)) {
-                    cells.push(<td className = "cell weekend" key = {cellNumber}>
+                    className+= "weekend "
+                    cells.push(<td className = {className}>
                         {(!rowNumber) && <div className = "border-top border-bottom"></div>}
                         {(rowNumber === this.state.teams[teamNumber].members.length) && <div className = "border-bottom"></div>}
+                        {this.addPaidDays(cellNumber, paidDays)}
                         </td>);               
                 } else {
-                    cells.push(<td className = "cell" key = {cellNumber}>
+                    cells.push(<td className = {className}>
                         {(!rowNumber) && <div className = "border-top border-bottom"></div>}
                         {( rowNumber === this.state.teams[teamNumber].members.length) && <div className = "border-bottom"></div>}
+                        {this.addPaidDays(cellNumber, paidDays)}
                         </td>); 
                 }
             }
         }
 
         return cells;
+    }
+
+    addPaidDays(cellNumber, paidDays) {
+
+        let element = "";
+        
+        paidDays.forEach((day) => {
+            if (day.month === this.month) {
+                if (cellNumber === day.startDay) {
+
+                    const vacation = day.endDay + 1 - day.startDay; 
+                    
+                    element = <div className = {day.type === "Paid" ? "paid-day" : "unpaid-day"} style = {{
+                            width: `${vacation * 27 + vacation - 2}px`,
+                            position: 'absolute'
+                        }}>Pd</div>
+                    
+                }    
+            }
+        });
+
+        return element;
     }
 
     createTeamInformation(teamNumber) {
@@ -102,15 +153,15 @@ export default class TableBody extends Component {
                if(!rowNumber) {
                     let className = "department ";
                     className += this.state.teams[teamNumber].name.split(" ").join("-");
-                    rows.push(<tr key = {teamNumber} className = {className}>
+                    rows.push(<tr className = {className}>
                         {this.createTeamInformation(teamNumber)}
                         {this.renderCells(rowNumber, teamNumber)}
                     </tr>)
                } else if(rowNumber === this.state.teams[teamNumber].members.length) { 
                 let className = "last-row ";
                 className += this.state.teams[teamNumber].name.split(" ").join("-");
-                rows.push(<tr key = {teamNumber} className = {className}>
-                    <td key = {rowNumber} className = "cell team">
+                rows.push(<tr className = {className}>
+                    <td className = "cell team">
                         {this.state.teams[teamNumber].members[rowNumber - 1].name}
                         {(!rowNumber) && <div className = "border-top"></div>}
                         {(rowNumber === this.state.teams[teamNumber].members.length) && <div className = "border-bottom"></div>}
@@ -118,8 +169,8 @@ export default class TableBody extends Component {
                     {this.renderCells(rowNumber, teamNumber)}
                 </tr>)
                } else {
-                rows.push(<tr key = {teamNumber} className = {this.state.teams[teamNumber].name.split(" ").join("-")}>
-                    <td key = {rowNumber} className = "cell team">{this.state.teams[teamNumber].members[rowNumber - 1].name}</td>
+                rows.push(<tr className = {this.state.teams[teamNumber].name.split(" ").join("-")}>
+                    <td className = "cell team">{this.state.teams[teamNumber].members[rowNumber - 1].name}</td>
                     {this.renderCells(rowNumber, teamNumber)}
                 </tr>)
                }

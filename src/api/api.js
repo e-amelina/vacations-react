@@ -8,8 +8,8 @@ export const data = {
             name: "FE_Team_User1",
             vacations: [
               {
-                startDate: "01.09.2020",
-                endDate: "04.09.2020",
+                startDate: "01.02.2020",
+                endDate: "04.02.2020",
                 type: "Paid",
               },
               {
@@ -23,8 +23,8 @@ export const data = {
             name: "FE_Team_User2",
             vacations: [
               {
-                startDate: "02.09.2020",
-                endDate: "02.09.2020",
+                startDate: "02.02.2020",
+                endDate: "02.02.2020",
                 type: "Paid",
               },
               {
@@ -38,8 +38,8 @@ export const data = {
             name: "FE_Team_User3",
             vacations: [
               {
-                startDate: "16.09.2020",
-                endDate: "20.09.2020",
+                startDate: "16.02.2020",
+                endDate: "20.02.2020",
                 type: "UnPaid",
               },
               {
@@ -53,8 +53,8 @@ export const data = {
             name: "FE_Team_User4",
             vacations: [
               {
-                startDate: "23.09.2020",
-                endDate: "27.09.2020",
+                startDate: "23.02.2020",
+                endDate: "27.02.2020",
                 type: "Paid",
               },
               {
@@ -68,8 +68,8 @@ export const data = {
             name: "FE_Team_User5",
             vacations: [
               {
-                startDate: "08.09.2020",
-                endDate: "11.09.2020",
+                startDate: "08.02.2020",
+                endDate: "11.02.2020",
                 type: "Paid",
               },
               {
@@ -119,8 +119,8 @@ export const data = {
             name: "Des_Team_User2",
             vacations: [
               {
-                startDate: "02.09.2020",
-                endDate: "05.09.2020",
+                startDate: "02.02.2020",
+                endDate: "05.02.2020",
                 type: "Paid",
               },
               {
@@ -134,8 +134,8 @@ export const data = {
             name: "Des_Team_User3",
             vacations: [
               {
-                startDate: "23.09.2020",
-                endDate: "27.09.2020",
+                startDate: "23.02.2020",
+                endDate: "27.02.2020",
                 type: "Paid",
               },
               {
@@ -149,8 +149,8 @@ export const data = {
             name: "Des_Team_User4",
             vacations: [
               {
-                startDate: "03.09.2020",
-                endDate: "05.09.2020",
+                startDate: "03.02.2020",
+                endDate: "05.02.2020",
                 type: "Paid",
               },
               {
@@ -164,8 +164,8 @@ export const data = {
             name: "Des_Team_User5",
             vacations: [
               {
-                startDate: "08.09.2020",
-                endDate: "13.09.2020",
+                startDate: "08.02.2020",
+                endDate: "13.02.2020",
                 type: "Paid",
               },
               {
@@ -215,8 +215,8 @@ export const data = {
             name: "BE_Team_User2",
             vacations: [
               {
-                startDate: "08.09.2020",
-                endDate: "13.09.2020",
+                startDate: "08.02.2020",
+                endDate: "13.02.2020",
                 type: "UnPaid",
               },
               {
@@ -230,8 +230,8 @@ export const data = {
             name: "BE_Team_User3",
             vacations: [
               {
-                startDate: "16.09.2020",
-                endDate: "17.09.2020",
+                startDate: "16.02.2020",
+                endDate: "17.02.2020",
                 type: "UnPaid",
               },
               {
@@ -245,8 +245,8 @@ export const data = {
             name: "BE_Team_User4",
             vacations: [
               {
-                startDate: "12.09.2020",
-                endDate: "13.09.2020",
+                startDate: "12.02.2020",
+                endDate: "13.02.2020",
                 type: "UnPaid",
               },
               {
@@ -275,8 +275,8 @@ export const data = {
             name: "BE_Team_User6",
             vacations: [
               {
-                startDate: "01.09.2020",
-                endDate: "05.09.2020",
+                startDate: "01.02.2020",
+                endDate: "05.02.2020",
                 type: "UnPaid",
               },
               {
@@ -327,8 +327,8 @@ export const data = {
             name: "Man_Team_User3",
             vacations: [
               {
-                startDate: "08.09.2020",
-                endDate: "20.09.2020",
+                startDate: "08.02.2020",
+                endDate: "20.02.2020",
                 type: "Paid",
               },
               {

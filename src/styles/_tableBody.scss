@@ -17,6 +17,10 @@ tr.department {
       }
     }
   }
+
+  .weekend {
+    background: #f0f0f0;
+  }
   
   tr {
 
@@ -27,10 +31,23 @@ tr.department {
             background: rgba(155, 153, 255, 0.1);
         }
     
-        & > .paid-day {
+        & td {
+          position: relative;
+
+          & > .paid-day {
             background-color: $frontend;
+            border-color: #fff;
+            top: 1px;
+          }
+
+          & > .unpaid-day {
+            background-color: rgba($color: $frontend, $alpha: 0.2);
+            color: $frontend;
             border-color: $frontend;
+            top: 1px;
+          }
         }
+
     
         .team {
             &__percentage-absent {
@@ -46,9 +63,20 @@ tr.department {
             background: rgba(255, 153, 153, 0.1);
         }
         
-        & > .paid-day {
+        & td {
+          position: relative;
+
+          & > .paid-day {
             background-color: $backend;
+            top: 1px;
+          }
+
+          & > .unpaid-day {
+            background-color: rgba($color: $backend, $alpha: 0.2);
+            color: $backend;
             border-color: $backend;
+            top: 1px;
+          }
         }
         
         .team {
@@ -65,15 +93,28 @@ tr.department {
         background: rgba(122, 175, 255, 0.1);
         }
     
-        & > .paid-day {
-        background-color: $designers;
-        border-color: $designers;
+        & td {
+
+          position: relative;
+
+          & > .paid-day {
+            background-color: $designers;
+            border-color: $designers;
+            top: 1px;
+          }
+
+          & > .unpaid-day {
+            background-color: rgba($color: $designers, $alpha: 0.2);
+            color: $designers;
+            border-color: $designers;
+            top: 1px;
+          }
         }
     
         .team {
-        &__percentage-absent {
-            background: $designers;
-        }
+          &__percentage-absent {
+              background: $designers;
+          }
         }
     }
   
@@ -82,13 +123,30 @@ tr.department {
         border-left: 3px solid $managers;
   
         &.department {
-        background: rgba(255, 167, 104, 0.1);
+          background: rgba(255, 167, 104, 0.1);
+        }
+
+        & td {
+          position: relative;
+
+          & > .paid-day {
+            background-color: $managers;
+            border-color: $managers;
+            top: 1px;
+          }
+
+          & > .unpaid-day {
+            background-color: rgba($color: $managers, $alpha: 0.2);
+            color: $managers;
+            border-color: $managers;
+            top: 1px;
+          }
         }
     
         .team {
-        &__percentage-absent {
-            background: $managers;
-        }
+          &__percentage-absent {
+              background: $managers;
+          }
         }
     }
 }
@@ -98,9 +156,7 @@ tr.department {
     line-height: 18px;
   }
   
-  .weekend {
-    background: #f0f0f0;
-  }
+  
   
   .team {
     min-width: 260px;
@@ -160,7 +216,6 @@ tr.department {
   
     td {
       position: relative;
-      z-index: 3;
     }
   }
 
@@ -169,7 +224,7 @@ tr.department {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 34px;
+    height: 31px;
     z-index: 1;
     border-top: 1px solid rgba(126, 126, 126, 0.3);
   }
@@ -179,7 +234,7 @@ tr.department {
     bottom: 0;
     left: 0;
     right: 0;
-    height: 33px;
+    height: 30px;
     z-index: 1;
     border-bottom: 1px solid rgba(126, 126, 126, 0.3);
   }
@@ -197,17 +252,25 @@ tr.department {
   .hidden {
     display: none;
   }
-  
+
   .paid-day {
-    background-color: blueviolet;
-    border-color: blueviolet;
+    height: 30px;
+    z-index: 4;
+    color: #fff;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  
-  .paid-day-first {
-    border-radius: 5px 0 0 5px;
+
+  .unpaid-day {
+    border: 1px solid #000;
+    height: 28px;
+    z-index: 4;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  
-  .paid-day-last {
-    border-radius: 0 5px 5px 0;
-  }
+
   

@@ -25,8 +25,10 @@ table {
   
   .cell {
     border: 1px solid rgba(126, 126, 126, 0.3);
-    width: 34px;
-    height: 33px;
+    min-width: 25px;
+    max-width: 25px;
+    width: 25px;
+    height: 30px;
     transition: background-color 0.3s;
   
     &:hover {
