@@ -13,20 +13,20 @@ export default class TableHead extends Component {
         for(let cellNumber = 0; cellNumber < this.props.size; cellNumber++) {
             const date = new Date(this.year, this.month - 1, cellNumber);
             if(!cellNumber) {
-                row.push(<th className = " cell cell-button" key = {cellNumber}>
+                row.push(<th className = " cell cell-button" key = {`head-cell ${cellNumber}`}>
                     <Button value = "&#10011;Add Vacation"/>
                     </th>);
             } else if(cellNumber === this.props.size -1) {
-                row.push(<th className = "cell cell-sum" key = {cellNumber}>Sum</th>)
+                row.push(<th className = "cell cell-sum" key = {`head-cell ${cellNumber}`}>Sum</th>)
             } else {
                 const weekdayName = date.toLocaleDateString("en-US", { weekday: "short" });
                 if (Utils.hiddenDays(cellNumber, this.countDays, this.props.size)) {
-                    row.push(<th className = "cell cell-day hidden" key = {cellNumber}> <span className="day">{weekdayName}</span><span className = "date">{cellNumber}</span> </th>);
+                    row.push(<th className = "cell cell-day hidden" key = {`head-cell ${cellNumber}`}> <span className="day">{weekdayName}</span><span className = "date">{cellNumber}</span> </th>);
                 } else {
                     if (Utils.isWeekend(weekdayName)) {
-                        row.push(<th className = "cell cell-day weekend" key = {cellNumber}> <span className="day">{weekdayName}</span><span className = "date">{cellNumber}</span> </th>);
+                        row.push(<th className = "cell cell-day weekend" key = {`head-cell ${cellNumber}`}> <span className="day">{weekdayName}</span><span className = "date">{cellNumber}</span> </th>);
                     } else {
-                        row.push(<th className = "cell cell-day" key = {cellNumber}> <span className="day">{weekdayName}</span><span className = "date">{cellNumber}</span> </th>);
+                        row.push(<th className = "cell cell-day" key = {`head-cell ${cellNumber}`}> <span className="day">{weekdayName}</span><span className = "date">{cellNumber}</span> </th>);
                     }
                 }
             }

@@ -45,7 +45,7 @@ export default class TableBody extends Component {
 
             if(cellNumber === this.props.size - 2) {
                 className += "cell-sum ";
-                cells.push(<td className = {className}>
+                cells.push(<td className = {className} key = {`team${teamNumber}-lastCell`}>
                     {(!rowNumber) && <div className = "border-top border-bottom"></div>}
                     {(rowNumber === this.state.dataTeams.teams[teamNumber].members.length) && <div className = "border-bottom"></div>}
                     {(rowNumber) ? (this.daysOff[teamNumber][rowNumber]) ? this.daysOff[teamNumber][rowNumber] : "0" : "" }
@@ -53,7 +53,7 @@ export default class TableBody extends Component {
             }
             if (Utils.hiddenDays(cellNumber + 1, this.countDays, this.props.size)) {
                 className += "hidden "
-                cells.push(<td className = {className}>
+                cells.push(<td className = {className} key = {`team${teamNumber}-cell${cellNumber}`}>
                     {(!rowNumber) && <div className = "border-top border-bottom"></div>}
                     {(rowNumber === this.state.dataTeams.teams[teamNumber].members.length) && <div className = "border-bottom"></div>}
                     {this.addPaidDays(cellNumber, paidDays, rowNumber, teamNumber)}
@@ -62,13 +62,13 @@ export default class TableBody extends Component {
                 const weekdayName = date.toLocaleDateString("en-US", { weekday: "short" });
                 if (Utils.isWeekend(weekdayName)) {
                     className+= "weekend "
-                    cells.push(<td className = {className}>
+                    cells.push(<td className = {className} key = {`team${teamNumber}-cell${cellNumber}`}>
                         {(!rowNumber) && <div className = "border-top border-bottom"></div>}
                         {(rowNumber === this.state.dataTeams.teams[teamNumber].members.length) && <div className = "border-bottom"></div>}
                         {this.addPaidDays(cellNumber, paidDays, rowNumber, teamNumber)}
                         </td>);               
                 } else {
-                    cells.push(<td className = {className}>
+                    cells.push(<td className = {className} key = {`team${teamNumber}-cell${cellNumber}`}>
                         {(!rowNumber) && <div className = "border-top border-bottom"></div>}
                         {( rowNumber === this.state.dataTeams.teams[teamNumber].members.length) && <div className = "border-bottom"></div>}
                         {this.addPaidDays(cellNumber, paidDays, rowNumber, teamNumber)}
@@ -106,7 +106,7 @@ export default class TableBody extends Component {
 
     createTeamInformation(teamNumber) {
         return (
-            <td className = "cell team">
+            <td className = "cell team" key = {`team${teamNumber}-cell0`}>
                 <div className = "border-top border-bottom"></div>
                 <div className = "team__info">
                     <span className = "team__name">
@@ -162,15 +162,15 @@ export default class TableBody extends Component {
                if(!rowNumber) {
                     let className = "department ";
                     className += this.state.dataTeams.teams[teamNumber].name.split(" ").join("-");
-                    rows.push(<tr className = {className}>
+                    rows.push(<tr className = {className} key = {`row${rowNumber}-team${teamNumber}`}>
                         {this.createTeamInformation(teamNumber)}
                         {this.renderCells(rowNumber, teamNumber)}
                     </tr>)
                } else if(rowNumber === this.state.dataTeams.teams[teamNumber].members.length) { 
                 let className = "last-row ";
                 className += this.state.dataTeams.teams[teamNumber].name.split(" ").join("-");
-                rows.push(<tr className = {className}>
-                    <td className = "cell team">
+                rows.push(<tr className = {className} key = {`row${rowNumber}-team${teamNumber}`}>
+                    <td className = "cell team" key = {`team${teamNumber}-cell0`}>
                         {this.state.dataTeams.teams[teamNumber].members[rowNumber - 1].name}
                         {(!rowNumber) && <div className = "border-top"></div>}
                         {(rowNumber === this.state.dataTeams.teams[teamNumber].members.length) && <div className = "border-bottom"></div>}
@@ -178,8 +178,8 @@ export default class TableBody extends Component {
                     {this.renderCells(rowNumber, teamNumber)}
                 </tr>)
                } else {
-                rows.push(<tr className = {this.state.dataTeams.teams[teamNumber].name.split(" ").join("-")}>
-                    <td className = "cell team">{this.state.dataTeams.teams[teamNumber].members[rowNumber - 1].name}</td>
+                rows.push(<tr className = {this.state.dataTeams.teams[teamNumber].name.split(" ").join("-")} key = {`row${rowNumber}-team${teamNumber}`}>
+                    <td className = "cell team" key = {`team${teamNumber}-cell0`}>{this.state.dataTeams.teams[teamNumber].members[rowNumber - 1].name}</td>
                     {this.renderCells(rowNumber, teamNumber)}
                 </tr>)
                }
