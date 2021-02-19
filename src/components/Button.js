@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { showModal } from "../components/Modal";
 
 export default class Button extends Component {
     constructor(props) {
@@ -8,7 +9,7 @@ export default class Button extends Component {
 
     render() {
         return(
-            <button>{this.props.value}</button>
+            <button onClick={showModal}>{this.props.value}</button>
         )
     }
 }
