@@ -1,6 +1,7 @@
 import './styles/index.scss';
 import { Navigation } from './components/Navigation';
 import Table from './components/Table';
+import Modal from './components/Modal';
 import { Component } from 'react';
 
 export default class App extends Component {
@@ -29,6 +30,7 @@ export default class App extends Component {
       <div className="App">
         <Navigation currentDate = {this.state.currentDate} prevMonth = {this.prevMonth} nextMonth = {this.nextMonth}/>
         <Table currentDate = {this.state.currentDate}/>
+        <Modal />
       </div>
     );
   }
