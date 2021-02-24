@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { data } from '../api/api';
 import TableBody from './TableBody';
 import TableHead from './TableHead';
 
@@ -8,7 +7,7 @@ export default class Table extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            dataTable : data,
+            dataTable : this.props.dataTable,
             size: 33
         }
     }

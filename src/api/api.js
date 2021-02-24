@@ -1,10 +1,12 @@
 export const data = {
     teams: [
       {
+        id: 1,
         name: "Frontend Team",
         percentageOfAbsent: [0, 2, 0, 0, 1, 22, 2, 2, 2, 2, 11, 1],
         members: [
           {
+            id: 1,
             name: "FE_Team_User1",
             vacations: [
               {
@@ -20,6 +22,7 @@ export const data = {
             ],
           },
           {
+            id: 2,
             name: "FE_Team_User2",
             vacations: [
               {
@@ -35,6 +38,7 @@ export const data = {
             ],
           },
           {
+            id: 3,
             name: "FE_Team_User3",
             vacations: [
               {
@@ -50,6 +54,7 @@ export const data = {
             ],
           },
           {
+            id: 4,
             name: "FE_Team_User4",
             vacations: [
               {
@@ -65,6 +70,7 @@ export const data = {
             ],
           },
           {
+            id: 5,
             name: "FE_Team_User5",
             vacations: [
               {
@@ -80,6 +86,7 @@ export const data = {
             ],
           },
           {
+            id: 6,
             name: "FE_Team_User6",
             vacations: [
               {
@@ -97,10 +104,12 @@ export const data = {
         ],
       },
       {
+        id: 2,
         name: "Designers",
         percentageOfAbsent: [0, 2, 0, 0, 1, 22, 2, 2, 2, 2, 11, 1],
         members: [
           {
+            id: 1,
             name: "Des_Team_User1",
             vacations: [
               {
@@ -116,6 +125,7 @@ export const data = {
             ],
           },
           {
+            id: 2,
             name: "Des_Team_User2",
             vacations: [
               {
@@ -131,6 +141,7 @@ export const data = {
             ],
           },
           {
+            id: 3,
             name: "Des_Team_User3",
             vacations: [
               {
@@ -146,6 +157,7 @@ export const data = {
             ],
           },
           {
+            id: 4,
             name: "Des_Team_User4",
             vacations: [
               {
@@ -161,6 +173,7 @@ export const data = {
             ],
           },
           {
+            id: 5,
             name: "Des_Team_User5",
             vacations: [
               {
@@ -176,6 +189,7 @@ export const data = {
             ],
           },
           {
+            id: 6,
             name: "Des_Team_User1",
             vacations: [
               {
@@ -193,10 +207,12 @@ export const data = {
         ],
       },
       {
+        id:3,
         name: "Backend Team",
         percentageOfAbsent: [0, 2, 0, 0, 1, 2, 2, 2, 2, 2, 1, 1],
         members: [
           {
+            id: 1,
             name: "BE_Team_User1",
             vacations: [
               {
@@ -212,6 +228,7 @@ export const data = {
             ],
           },
           {
+            id: 2,
             name: "BE_Team_User2",
             vacations: [
               {
@@ -227,6 +244,7 @@ export const data = {
             ],
           },
           {
+            id: 3,
             name: "BE_Team_User3",
             vacations: [
               {
@@ -242,6 +260,7 @@ export const data = {
             ],
           },
           {
+            id: 4,
             name: "BE_Team_User4",
             vacations: [
               {
@@ -257,6 +276,7 @@ export const data = {
             ],
           },
           {
+            id: 5,
             name: "BE_Team_User5",
             vacations: [
               {
@@ -272,6 +292,7 @@ export const data = {
             ],
           },
           {
+            id: 6,
             name: "BE_Team_User6",
             vacations: [
               {
@@ -289,10 +310,12 @@ export const data = {
         ],
       },
       {
+        id:4,
         name: "Managers",
         percentageOfAbsent: [0, 2, 0, 0, 1, 22, 2, 2, 2, 2, 11, 1],
         members: [
           {
+            id: 1,
             name: "Man_Team_User1",
             vacations: [
               {
@@ -309,6 +332,7 @@ export const data = {
             ],
           },
           {
+            id: 2,
             name: "Man_Team_User2",
             vacations: [
               {
@@ -324,6 +348,7 @@ export const data = {
             ],
           },
           {
+            id: 3,
             name: "Man_Team_User3",
             vacations: [
               {
@@ -339,6 +364,7 @@ export const data = {
             ],
           },
           {
+            id: 4,
             name: "Man_Team_User4",
             vacations: [
               {
@@ -354,6 +380,7 @@ export const data = {
             ],
           },
           {
+            id: 5,
             name: "Man_Team_User5",
             vacations: [
               {
@@ -369,6 +396,7 @@ export const data = {
             ],
           },
           {
+            id: 6,
             name: "Man_Team_User",
             vacations: [
               {

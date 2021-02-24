@@ -1,9 +1,53 @@
 import { Component } from "react";
 
+const Teams = ({dataTable}) => {
+  return (
+    dataTable.teams.map((team) => {
+      return <option value = {team.id}>{team.name}</option>;
+    })
+  )
+} 
+
+const Users = ({team}) => {
+  return (
+    team.members.map((member) => {
+      return <option value = {member.id}>{member.name}</option>
+    })
+  )
+}
+
+
+
 export default class Modal extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      startDay: 1,
+      endDay: 1,
+    }
+  }
 
+  getTeam() {
+    console.log(this.props.dataTable)
+    const teamF = this.props.dataTable.teams.find(team => team.id === Number.parseInt(this.state.selectedTeam, 10));
+    return teamF;
+  }
+
+  getVacation(e) {
+    e.preventDefault();
+    if(!this.state.dateStart || !this.state.dateEnd || !this.state.type || !this.state.selectedUser) {
+      const button = e.target;
+      button.classList.add("error");
+      setTimeout(() => {
+        button.classList.remove("error");
+      }, 1500, button);
+      return;
+    }
+    return {
+      startDate: this.state.dateStart.split("-").reverse().join("."),
+      endDate: this.state.dateEnd.split("-").reverse().join("."),
+      type: this.state.type,
+    }
   }
 
   render() {
@@ -13,53 +57,71 @@ export default class Modal extends Component {
           <form className="vacation-form">
             <div className="vacation-form__header">
               <h4 className="vacation-form__title">Vacation Request</h4>
-              <p className="vacation-form__days">8 Days</p>
+              <p className="vacation-form__days">{this.state.endDay + 1 - this.state.startDay} Days</p>
             </div>
             <div className="vacation-form__content">
               <div className="vacation-form__row">
-                <p className="vacation-form__suptitle">Dates</p>
+                <p className="vacation-form__subtitle">Dates</p>
                 <div className="vacation-form__dates">
                   <div className="vacation-form__date">
                     <p className="vacation-form__date-text">From</p>
-                    <input type="date" value="2021-02-12" />
+                    <input type="date" onBlur = {(e) => 
+                      {
+                        this.setState({dateStart : e.target.value});
+                        const field = e.target;
+                        if(new Date(e.target.value) > new Date(this.state.dateEnd)) {
+                          
+                          field.classList.add("error");
+                          field.focus();
+                        } else {
+                          field.classList.remove("error");
+                        }
+                      }}/>
                   </div>
                   <div className="vacation-form__date">
                     <p className="vacation-form__date-text">To</p>
-                    <input type="date" value="2021-02-20" />
+                    <input type="date" onBlur = {(e) => 
+                      {
+                        this.setState({dateEnd : e.target.value});
+                        const field = e.target;
+                        if(new Date(this.state.dateStart) > new Date(e.target.value)) {
+                          
+                          field.classList.add("error");
+                          field.focus();
+                        } else {
+                          field.classList.remove("error");
+                        }
+                      }}/>
                   </div>
                 </div>
               </div>
               <div className="vacation-form__row">
-                <p className="vacation-form__suptitle">Team</p>
-                <select className="vacation-form__select">
+                <p className="vacation-form__subtitle">Team</p>
+                <select className="vacation-form__select" onChange = {(e) => {this.setState({selectedTeam : e.target.value})}}>
                   <option value="" selected disabled hidden>Team name</option>
-                  <option>Frontend Team</option>
-                  <option>Backend Team</option>
+                  <Teams dataTable = {this.props.dataTable}/>
                 </select>
               </div>
               <div className="vacation-form__row">
-                <p className="vacation-form__suptitle">User</p>
-                <select className="vacation-form__select">
-                  <option value="" selected disabled hidden>User name</option>
-                  <option>User 1</option>
-                  <option>User 2</option>
-                  <option>User 3</option>
+                <p className="vacation-form__subtitle">User</p>
+                <select className="vacation-form__select" onChange = {(e) => {this.setState({selectedUser : e.target.value})}}>
+                {(!this.state.selectedTeam) && <option value="" selected>User name</option>}
+                  {(this.state.selectedTeam) && <Users team = {this.getTeam()}/>}
                 </select>
               </div>
               <div className="vacation-form__row">
-                <p className="vacation-form__suptitle">Vac Type</p>
-                <select className="vacation-form__select">
-                  <option>Paid Day Off (PD)</option>
-                  <option>Lorem ipsum dolor sit amet consectetur.</option>
-                  <option>Paid Day Off (PD)</option>
-                  <option>Lorem ipsum dolor sit amet consectetur.</option>
+                <p className="vacation-form__subtitle">Vac Type</p>
+                <select className="vacation-form__select" onChange = {(e) => {this.setState({type : e.target.value})}}>
+                <option value="" selected disabled hidden>Type</option>
+                  <option value = "Paid">Paid Day Off (PD)</option>
+                  <option value = "UnPaid">Unpaid Day Off (UPD)</option>
                 </select>
               </div>
               <div className="vacation-form__footer">
                 <button className="vacation-form__btn vacation-form__cancel close_modal" onClick={hideModal}>
                   Cancel
                 </button>
-                <button className="vacation-form__btn vacation-form__send close_modal" onClick={hideModal}>
+                <button className="vacation-form__btn vacation-form__send close_modal" onClick={(e) => {this.props.addVacation(e, this.state.selectedTeam, this.state.selectedUser, this.getVacation(e))}}>
                   Send
                 </button>
               </div>
@@ -82,9 +144,12 @@ export function showModal(e) {
 
 export function hideModal(e) {
   e.preventDefault();
+  e.target.closest("form").reset();
   document.querySelector('.modal__dialog').classList.add("bounceOutDown");
   setTimeout(() => {
     document.querySelector('.modal').classList.remove("modal-active");
     document.body.classList.remove("no-scroll");
   }, 500);
 }
+
+

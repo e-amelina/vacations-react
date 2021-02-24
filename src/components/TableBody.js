@@ -10,7 +10,7 @@ export default class TableBody extends Component {
             dataTeams : data,
         }
 
-        this.daysOff = new Array(this.state.dataTeams.teams.length)
+        this.daysOff = new Array(this.state.dataTeams.teams.length);
 
     }
 
@@ -86,7 +86,7 @@ export default class TableBody extends Component {
         
         paidDays.forEach((day) => {
             if (day.month === this.month) {
-                if (cellNumber === day.startDay) {
+                if (cellNumber + 1 === day.startDay) {
 
                     const vacation = day.endDay + 1 - day.startDay; 
                     
