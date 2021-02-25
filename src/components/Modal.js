@@ -154,6 +154,8 @@ export default class Modal extends Component {
 export function showModal(e) {
   document.querySelector('.modal__dialog').classList.remove("bounceOutDown");
   document.querySelector('.modal').classList.add("modal-active");
+  const inputs = document.querySelectorAll("input");
+  inputs.forEach(input => input.classList.remove("error"));
   document.body.classList.add("no-scroll");
 }
 
