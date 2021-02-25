@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { data } from '../api/api';
 import { Utils } from '../utils/utils';
 
 
@@ -7,11 +6,12 @@ export default class TableBody extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            dataTeams : data,
+            dataTeams : this.props.dataTable,
         }
 
         this.daysOff = new Array(this.state.dataTeams.teams.length);
-
+        this.peopleCountVacationsByDay = new Array(this.props.size);
+        this.vacationPeople =  0;
     }
 
     getPaidDays(vacations) {
@@ -87,10 +87,12 @@ export default class TableBody extends Component {
         paidDays.forEach((day) => {
             if (day.month === this.month) {
                 if (cellNumber + 1 === day.startDay) {
-
-                    const vacation = day.endDay + 1 - day.startDay; 
-                    
+                    this.vacationPeople += 1;
+                    const vacation = day.endDay + 1 - day.startDay;                     
                     this.daysOff[teamNumber][rowNumber] = vacation;
+                    for(let vac = day.startDay; vac <= day.endDay; vac++) {
+                        this.props.addVacationsByDay(vac);
+                    }
 
                     element = <div className = {day.type === "Paid" ? "paid-day" : "unpaid-day"} style = {{
                             width: `${vacation * 27 + vacation - 2}px`,
@@ -151,11 +153,24 @@ export default class TableBody extends Component {
         }
     }
 
+    componentDidMount() {
+        this.props.addVacationsPeople(this.vacationPeople);
+    }
+
+    componentDidUpdate(prevProps) {
+        if(prevProps.currentDate !== this.props.currentDate) {
+            this.props.addVacationsPeople(this.vacationPeople);
+        }
+    }
+
     render() {
         this.month = Number.parseInt(this.props.currentDate.toLocaleDateString("en-US", { month: "numeric" }), 10);
         this.year = Number.parseInt(this.props.currentDate.toLocaleDateString("en-US", { year: "numeric" }), 10);
         this.countDays = Utils.getDaysInMonth(this.month, this.year);
         const rows = [];
+        this.props.initVacationsByDay();
+        this.vacationPeople = 0;
+
 
         for(let teamNumber = 0; teamNumber < this.state.dataTeams.teams.length; teamNumber++ ) {
             for(let rowNumber = 0; rowNumber < this.state.dataTeams.teams[teamNumber].members.length + 1; rowNumber++ ) {
