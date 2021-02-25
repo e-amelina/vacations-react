@@ -17,7 +17,6 @@ const Users = ({team}) => {
 }
 
 
-
 export default class Modal extends Component {
   constructor(props) {
     super(props);
@@ -31,6 +30,20 @@ export default class Modal extends Component {
     console.log(this.props.dataTable)
     const teamF = this.props.dataTable.teams.find(team => team.id === Number.parseInt(this.state.selectedTeam, 10));
     return teamF;
+  }
+
+  validateDate(value) {
+    const [year, , ] = value.split("-");
+    console.log(year);
+
+    const yearLength = year.split("").length;
+
+   if(yearLength > 4) {
+      return false;
+    }
+
+    return true;
+   
   }
 
   getVacation(e) {
@@ -69,7 +82,7 @@ export default class Modal extends Component {
                       {
                         this.setState({dateStart : e.target.value});
                         const field = e.target;
-                        if(new Date(e.target.value) > new Date(this.state.dateEnd)) {
+                        if(!e.target.value || !this.validateDate(e.target.value) || (new Date(e.target.value) > new Date(this.state.dateEnd))) {
                           
                           field.classList.add("error");
                           field.focus();
@@ -77,6 +90,7 @@ export default class Modal extends Component {
                           field.classList.remove("error");
                         }
                       }}/>
+
                   </div>
                   <div className="vacation-form__date">
                     <p className="vacation-form__date-text">To</p>
@@ -84,7 +98,7 @@ export default class Modal extends Component {
                       {
                         this.setState({dateEnd : e.target.value});
                         const field = e.target;
-                        if(new Date(this.state.dateStart) > new Date(e.target.value)) {
+                        if(!e.target.value || !this.validateDate(e.target.value) || (new Date(this.state.dateStart) > new Date(e.target.value))) {
                           
                           field.classList.add("error");
                           field.focus();
@@ -112,7 +126,7 @@ export default class Modal extends Component {
               <div className="vacation-form__row">
                 <p className="vacation-form__subtitle">Vac Type</p>
                 <select className="vacation-form__select" onChange = {(e) => {this.setState({type : e.target.value})}}>
-                <option value="" selected disabled hidden>Type</option>
+                  <option value="" selected disabled hidden>Type</option>
                   <option value = "Paid">Paid Day Off (PD)</option>
                   <option value = "UnPaid">Unpaid Day Off (UPD)</option>
                 </select>
