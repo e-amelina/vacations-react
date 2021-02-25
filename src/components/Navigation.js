@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export const Navigation = ({currentDate, prevMonth, nextMonth}) => {
     return (
         <div className="calendarBar">
@@ -9,4 +11,10 @@ export const Navigation = ({currentDate, prevMonth, nextMonth}) => {
             <div className="btn next-btn" onClick={nextMonth}></div>
         </div>
     );
+}
+
+Navigation.propTypes = {
+    currentDate: PropTypes.object.isRequired,
+    prevMonth: PropTypes.func.isRequired,
+    nextMonth: PropTypes.func.isRequired
 }

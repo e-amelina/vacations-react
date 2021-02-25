@@ -1,4 +1,5 @@
 import { Component } from "react";
+import PropTypes from "prop-types";
 
 const Teams = ({dataTable}) => {
   return (
@@ -167,3 +168,25 @@ export function hideModal(e) {
 }
 
 
+Modal.propTypes = {
+  currentDate: PropTypes.object.isRequired,
+  addVacation: PropTypes.func.isRequired,
+  dataTable: PropTypes.shape({
+    teams: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number,
+            name:PropTypes.string,
+            percentageOfAbsent: PropTypes.arrayOf(PropTypes.number),
+            members: PropTypes.arrayOf(PropTypes.shape({
+                id: PropTypes.number,
+                name:PropTypes.string,
+                vacation: PropTypes.arrayOf(PropTypes.shape({
+                    startDate: PropTypes.string,
+                    endDate: PropTypes.string,
+                    type: PropTypes.string
+                }))
+            }))
+        })
+    )
+}).isRequired
+}

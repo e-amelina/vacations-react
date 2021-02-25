@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { Utils } from '../utils/utils';
+import PropTypes from "prop-types";
 
 
 export default class TableBody extends Component {
@@ -203,4 +204,34 @@ export default class TableBody extends Component {
 
         return rows;
     }
+}
+
+TableBody.propTypes = {
+    dataTable: PropTypes.shape({
+        teams: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.number,
+                name:PropTypes.string,
+                percentageOfAbsent: PropTypes.arrayOf(PropTypes.number),
+                members: PropTypes.arrayOf(PropTypes.shape({
+                    id: PropTypes.number,
+                    name:PropTypes.string,
+                    vacation: PropTypes.arrayOf(PropTypes.shape({
+                        startDate: PropTypes.string,
+                        endDate: PropTypes.string,
+                        type: PropTypes.string
+                    }))
+                }))
+            })
+        )
+    }).isRequired,
+    size: PropTypes.number,
+    addVacationsPeople: PropTypes.func.isRequired,
+    initVacationsByDay: PropTypes.func.isRequired,
+    addVacationsByDay: PropTypes.func.isRequired,
+    currentDate: PropTypes.object.isRequired
+}
+
+TableBody.defaultProps = {
+    size: 33
 }

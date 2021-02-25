@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import Button from './Button';
 import { Utils } from '../utils/utils';
+import PropTypes from "prop-types";
 
 export default class TableHead extends Component {
 
@@ -34,4 +35,13 @@ export default class TableHead extends Component {
 
         return row;
     }
+}
+
+TableHead.propTypes = {
+    size: PropTypes.number,
+    currentDate: PropTypes.object.isRequired
+}
+
+TableHead.defaultProps = {
+    size: 33
 }

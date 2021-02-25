@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TableBody from './TableBody';
 import TableHead from './TableHead';
 import TableFooter from './TableFooter';
+import PropTypes from "prop-types";
 
 
 export default class Table extends Component {
@@ -49,4 +50,26 @@ export default class Table extends Component {
             </table>
          )
     }
+}
+
+Table.propTypes = {
+    currentDate: PropTypes.object.isRequired,
+    dataTable: PropTypes.shape({
+        teams: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.number,
+                name:PropTypes.string,
+                percentageOfAbsent: PropTypes.arrayOf(PropTypes.number),
+                members: PropTypes.arrayOf(PropTypes.shape({
+                    id: PropTypes.number,
+                    name:PropTypes.string,
+                    vacation: PropTypes.arrayOf(PropTypes.shape({
+                        startDate: PropTypes.string,
+                        endDate: PropTypes.string,
+                        type: PropTypes.string
+                    }))
+                }))
+            })
+        )
+    }).isRequired,
 }

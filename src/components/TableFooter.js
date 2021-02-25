@@ -1,5 +1,6 @@
 import { Component } from "react";
 import  { Utils } from "../utils/utils";
+import PropTypes from "prop-types";
 
 
 export default class TableFooter extends Component {
@@ -55,4 +56,33 @@ export default class TableFooter extends Component {
             </>
         )
     }
+}
+
+TableFooter.propTypes = {
+    dataTable: PropTypes.shape({
+        teams: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.number,
+                name:PropTypes.string,
+                percentageOfAbsent: PropTypes.arrayOf(PropTypes.number),
+                members: PropTypes.arrayOf(PropTypes.shape({
+                    id: PropTypes.number,
+                    name:PropTypes.string,
+                    vacation: PropTypes.arrayOf(PropTypes.shape({
+                        startDate: PropTypes.string,
+                        endDate: PropTypes.string,
+                        type: PropTypes.string
+                    }))
+                }))
+            })
+        )
+    }).isRequired,
+    size: PropTypes.number,
+    peopleCountVacationsByDay: PropTypes.arrayOf(PropTypes.number).isRequired,
+    currentDate: PropTypes.object.isRequired,
+    vacationPeople: PropTypes.number.isRequired
+}
+
+TableFooter.defaultProps = {
+    size: 33
 }
