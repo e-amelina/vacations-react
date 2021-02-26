@@ -1,0 +1,280 @@
+tr.department {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 17px;
+    display: table-row;
+  
+    td {
+      position: relative;
+  
+      .department__cell { 
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: rgba(126, 126, 126, 0.3);
+      }
+    }
+  }
+
+  .weekend {
+    background: #f0f0f0;
+  }
+  
+  tr {
+
+    &.Frontend-Team {
+    border-left: 3px solid $frontend;
+    
+        &.department {
+            background: rgba(155, 153, 255, 0.1);
+        }
+    
+        & td {
+          position: relative;
+
+          & > .paid-day {
+            background-color: $frontend;
+            border-color: #fff;
+            top: 1px;
+          }
+
+          & > .unpaid-day {
+            background-color: rgba($color: $frontend, $alpha: 0.2);
+            color: $frontend;
+            border-color: $frontend;
+            top: 1px;
+          }
+        }
+
+    
+        .team {
+            &__percentage-absent {
+                background: $frontend;
+            }
+        }
+    }
+    
+    &.Backend-Team {
+        border-left: 3px solid $backend;
+        
+        &.department {
+            background: rgba(255, 153, 153, 0.1);
+        }
+        
+        & td {
+          position: relative;
+
+          & > .paid-day {
+            background-color: $backend;
+            top: 1px;
+          }
+
+          & > .unpaid-day {
+            background-color: rgba($color: $backend, $alpha: 0.2);
+            color: $backend;
+            border-color: $backend;
+            top: 1px;
+          }
+        }
+        
+        .team {
+            &__percentage-absent {
+                background: $backend;
+            }
+        }
+    }
+    
+    &.Designers {
+        border-left: 3px solid $designers;
+    
+        &.department {
+        background: rgba(122, 175, 255, 0.1);
+        }
+    
+        & td {
+
+          position: relative;
+
+          & > .paid-day {
+            background-color: $designers;
+            border-color: $designers;
+            top: 1px;
+          }
+
+          & > .unpaid-day {
+            background-color: rgba($color: $designers, $alpha: 0.2);
+            color: $designers;
+            border-color: $designers;
+            top: 1px;
+          }
+        }
+    
+        .team {
+          &__percentage-absent {
+              background: $designers;
+          }
+        }
+    }
+  
+  
+    &.Managers {
+        border-left: 3px solid $managers;
+  
+        &.department {
+          background: rgba(255, 167, 104, 0.1);
+        }
+
+        & td {
+          position: relative;
+
+          & > .paid-day {
+            background-color: $managers;
+            border-color: $managers;
+            top: 1px;
+          }
+
+          & > .unpaid-day {
+            background-color: rgba($color: $managers, $alpha: 0.2);
+            color: $managers;
+            border-color: $managers;
+            top: 1px;
+          }
+        }
+    
+        .team {
+          &__percentage-absent {
+              background: $managers;
+          }
+        }
+    }
+}
+  
+  .teams {
+    font-size: 12px;
+    line-height: 18px;
+  }
+  
+  
+  
+  .team {
+    min-width: 260px;
+    padding: 0 20px;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 18px;
+  
+    &__name {
+      font-weight: 600;
+    }
+  
+    &__info {
+      display: flex;
+      justify-content: start;
+      flex-wrap: wrap;
+    }
+  
+    &__count-members {
+      width: 50px;
+      font-size: 12px;
+      line-height: 18px;
+      color: #949494;
+      margin-left: auto;
+  
+      &::before {
+        content: "";
+        width: 20px;
+        display: inline-block;
+        background-image: url(../images/groups.svg);
+        height: 15px;
+        background-size: 20px 20px;
+        opacity: 0.6;
+        background-repeat: no-repeat;
+        padding-left: 3px;
+      }
+    }
+  
+    &__percentage-absent {
+      font-size: 12px;
+      line-height: 18px;
+      padding: 1px 5px;
+      color: #fff;
+      border-radius: 2px;
+    }
+  
+    &__btn--hide {
+      background-image: url(../images/arrowUp.svg);
+      width: 20px;
+      height: 20px;
+    }
+  }
+  
+  .last-row {
+    border-bottom: 33px solid #fff;
+    position: relative;
+  
+    td {
+      position: relative;
+    }
+  }
+
+ .border-top {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 31px;
+    z-index: 1;
+    border-top: 1px solid rgba(126, 126, 126, 0.3);
+  }
+
+  .border-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    z-index: 1;
+    border-bottom: 1px solid rgba(126, 126, 126, 0.3);
+  }
+  
+  tr.close.department {
+    border-bottom: 33px solid #fff;
+  }
+  
+  .close .team__info .team__btn--hide {
+    transform: rotate(180deg);
+    position: relative;
+    z-index: 2;
+  }
+  
+  .hidden {
+    display: none;
+  }
+
+  .paid-day {
+    height: 30px;
+    z-index: 4;
+    color: #fff;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .unpaid-day {
+    border: 1px solid #000;
+    height: 28px;
+    z-index: 4;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  
+
+  
+
+  

@@ -1,0 +1,38 @@
+.vacation {
+    background-color: #F3F3F3;
+    text-align: center;
+
+    &.team {
+      text-align: left;
+    }
+  }
+
+  .summary {
+    border-bottom: 1px solid #E2E2E2;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  .vacations-people {
+    margin-left: 30px;
+    margin-right: 10px;
+    &::before {
+      content: "";
+      width: 20px;
+      display: inline-block;
+      background-image: url(../images/groups.svg);
+      height: 15px;
+      background-size: 20px 20px;
+      opacity: 0.6;
+      background-repeat: no-repeat;
+      padding-left: 3px;
+    }
+  }
+
+  .vacations-people-percentage {
+    background-color: #48ba46;
+    color: #fff;
+    padding: 3px 5px;
+    border-radius: 2px;
+  }
