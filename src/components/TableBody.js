@@ -10,7 +10,7 @@ export default class TableBody extends Component {
             dataTeams : this.props.dataTable,
         }
 
-        this.daysOff = new Array(this.state.dataTeams.teams.length);
+        this.daysOff = new Array(this.props.dataTable.teams.length);
         this.peopleCountVacationsByDay = new Array(this.props.size);
         this.vacationPeople =  0;
     }
@@ -34,7 +34,7 @@ export default class TableBody extends Component {
         let paidDays = [];
 
         if(rowNumber) {
-            paidDays = this.getPaidDays(this.state.dataTeams.teams[teamNumber].members[rowNumber - 1].vacations);
+            paidDays = this.getPaidDays(this.props.dataTable.teams[teamNumber].members[rowNumber - 1].vacations);
         } else {
             this.daysOff[teamNumber] = [];
         }
@@ -48,7 +48,7 @@ export default class TableBody extends Component {
                 className += "cell-sum ";
                 cells.push(<td className = {className} key = {`team${teamNumber}-lastCell`}>
                     {(!rowNumber) && <div className = "border-top border-bottom"></div>}
-                    {(rowNumber === this.state.dataTeams.teams[teamNumber].members.length) && <div className = "border-bottom"></div>}
+                    {(rowNumber === this.props.dataTable.teams[teamNumber].members.length) && <div className = "border-bottom"></div>}
                     {(rowNumber) ? (this.daysOff[teamNumber][rowNumber]) ? this.daysOff[teamNumber][rowNumber] : "0" : "" }
                     </td>);
             }
@@ -56,7 +56,7 @@ export default class TableBody extends Component {
                 className += "hidden "
                 cells.push(<td className = {className} key = {`team${teamNumber}-cell${cellNumber}`}>
                     {(!rowNumber) && <div className = "border-top border-bottom"></div>}
-                    {(rowNumber === this.state.dataTeams.teams[teamNumber].members.length) && <div className = "border-bottom"></div>}
+                    {(rowNumber === this.props.dataTable.teams[teamNumber].members.length) && <div className = "border-bottom"></div>}
                     {this.addPaidDays(cellNumber, paidDays, rowNumber, teamNumber)}
                     </td>);
             } else {
@@ -65,13 +65,13 @@ export default class TableBody extends Component {
                     className+= "weekend "
                     cells.push(<td className = {className} key = {`team${teamNumber}-cell${cellNumber}`}>
                         {(!rowNumber) && <div className = "border-top border-bottom"></div>}
-                        {(rowNumber === this.state.dataTeams.teams[teamNumber].members.length) && <div className = "border-bottom"></div>}
+                        {(rowNumber === this.props.dataTable.teams[teamNumber].members.length) && <div className = "border-bottom"></div>}
                         {this.addPaidDays(cellNumber, paidDays, rowNumber, teamNumber)}
                         </td>);               
                 } else {
                     cells.push(<td className = {className} key = {`team${teamNumber}-cell${cellNumber}`}>
                         {(!rowNumber) && <div className = "border-top border-bottom"></div>}
-                        {( rowNumber === this.state.dataTeams.teams[teamNumber].members.length) && <div className = "border-bottom"></div>}
+                        {( rowNumber === this.props.dataTable.teams[teamNumber].members.length) && <div className = "border-bottom"></div>}
                         {this.addPaidDays(cellNumber, paidDays, rowNumber, teamNumber)}
                         </td>); 
                 }
@@ -113,12 +113,12 @@ export default class TableBody extends Component {
                 <div className = "border-top border-bottom"></div>
                 <div className = "team__info">
                     <span className = "team__name">
-                        {this.state.dataTeams.teams[teamNumber].name}
+                        {this.props.dataTable.teams[teamNumber].name}
                     </span>
                     <span className = "team__count-members">
-                    {this.state.dataTeams.teams[teamNumber].members.length}
+                    {this.props.dataTable.teams[teamNumber].members.length}
                     </span>
-                    <span className = "team__percentage-absent">{this.state.dataTeams.teams[teamNumber].percentageOfAbsent[this.month]}%</span>
+                    <span className = "team__percentage-absent">{this.props.dataTable.teams[teamNumber].percentageOfAbsent[this.month]}%</span>
                     <span className = "team__btn--hide" onClick = {(event) => this.hideMembers(event, teamNumber)}></span>
                 </div>
             </td>
@@ -127,7 +127,7 @@ export default class TableBody extends Component {
 
     hideMembers (event, teamNumber) {
         const hideButton = event.target;
-        const className = this.state.dataTeams.teams[teamNumber].name.split(" ").join("-");
+        const className = this.props.dataTable.teams[teamNumber].name.split(" ").join("-");
                             
         const hiddenBlock = hideButton.closest("tr");
         if (hiddenBlock.classList.contains("close")) {
@@ -173,29 +173,29 @@ export default class TableBody extends Component {
         this.vacationPeople = 0;
 
 
-        for(let teamNumber = 0; teamNumber < this.state.dataTeams.teams.length; teamNumber++ ) {
-            for(let rowNumber = 0; rowNumber < this.state.dataTeams.teams[teamNumber].members.length + 1; rowNumber++ ) {
+        for(let teamNumber = 0; teamNumber < this.props.dataTable.teams.length; teamNumber++ ) {
+            for(let rowNumber = 0; rowNumber < this.props.dataTable.teams[teamNumber].members.length + 1; rowNumber++ ) {
                if(!rowNumber) {
                     let className = "department ";
-                    className += this.state.dataTeams.teams[teamNumber].name.split(" ").join("-");
+                    className += this.props.dataTable.teams[teamNumber].name.split(" ").join("-");
                     rows.push(<tr className = {className} key = {`row${rowNumber}-team${teamNumber}`}>
                         {this.createTeamInformation(teamNumber)}
                         {this.renderCells(rowNumber, teamNumber)}
                     </tr>)
-               } else if(rowNumber === this.state.dataTeams.teams[teamNumber].members.length) { 
+               } else if(rowNumber === this.props.dataTable.teams[teamNumber].members.length) { 
                 let className = "last-row ";
-                className += this.state.dataTeams.teams[teamNumber].name.split(" ").join("-");
+                className += this.props.dataTable.teams[teamNumber].name.split(" ").join("-");
                 rows.push(<tr className = {className} key = {`row${rowNumber}-team${teamNumber}`}>
                     <td className = "cell team" key = {`team${teamNumber}-cell0`}>
-                        {this.state.dataTeams.teams[teamNumber].members[rowNumber - 1].name}
+                        {this.props.dataTable.teams[teamNumber].members[rowNumber - 1].name}
                         {(!rowNumber) && <div className = "border-top"></div>}
-                        {(rowNumber === this.state.dataTeams.teams[teamNumber].members.length) && <div className = "border-bottom"></div>}
+                        {(rowNumber === this.props.dataTable.teams[teamNumber].members.length) && <div className = "border-bottom"></div>}
                         </td>
                     {this.renderCells(rowNumber, teamNumber)}
                 </tr>)
                } else {
-                rows.push(<tr className = {this.state.dataTeams.teams[teamNumber].name.split(" ").join("-")} key = {`row${rowNumber}-team${teamNumber}`}>
-                    <td className = "cell team" key = {`team${teamNumber}-cell0`}>{this.state.dataTeams.teams[teamNumber].members[rowNumber - 1].name}</td>
+                rows.push(<tr className = {this.props.dataTable.teams[teamNumber].name.split(" ").join("-")} key = {`row${rowNumber}-team${teamNumber}`}>
+                    <td className = "cell team" key = {`team${teamNumber}-cell0`}>{this.props.dataTable.teams[teamNumber].members[rowNumber - 1].name}</td>
                     {this.renderCells(rowNumber, teamNumber)}
                 </tr>)
                }

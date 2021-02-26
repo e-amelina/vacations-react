@@ -10,6 +10,7 @@ export default class App extends Component {
     super(props);
     this.state = {
       currentDate: new Date(),
+      dataTable: null
     }
 
     this.nextMonth = this.nextMonth.bind(this);
@@ -46,8 +47,8 @@ export default class App extends Component {
 
   addVacation(event, teamNumber, userNumber, vacation) {
     if(vacation) {
-      data.teams[teamNumber - 1].members[userNumber - 1].vacations.push(vacation)
-      this.setState({dataTable: data});
+      data.teams[teamNumber - 1].members[userNumber - 1].vacations.push(vacation);
+      this.fetchCalendar();
       hideModal(event);
     }
   }

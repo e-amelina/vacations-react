@@ -28,15 +28,12 @@ export default class Modal extends Component {
   }
 
   getTeam() {
-    console.log(this.props.dataTable)
     const teamF = this.props.dataTable.teams.find(team => team.id === Number.parseInt(this.state.selectedTeam, 10));
     return teamF;
   }
 
   validateDate(value) {
     const [year, , ] = value.split("-");
-    console.log(year);
-
     const yearLength = year.split("").length;
 
    if(yearLength > 4) {
@@ -113,7 +110,7 @@ export default class Modal extends Component {
               <div className="vacation-form__row">
                 <p className="vacation-form__subtitle">Team</p>
                 <select className="vacation-form__select" onChange = {(e) => {this.setState({selectedTeam : e.target.value})}}>
-                  <option value="" selected disabled hidden>Team name</option>
+                  <option value = "" disabled hidden>Team name</option>
                   <Teams dataTable = {this.props.dataTable}/>
                 </select>
               </div>
@@ -127,7 +124,7 @@ export default class Modal extends Component {
               <div className="vacation-form__row">
                 <p className="vacation-form__subtitle">Vac Type</p>
                 <select className="vacation-form__select" onChange = {(e) => {this.setState({type : e.target.value})}}>
-                  <option value="" selected disabled hidden>Type</option>
+                  <option value = "" disabled hidden>Type</option>
                   <option value = "Paid">Paid Day Off (PD)</option>
                   <option value = "UnPaid">Unpaid Day Off (UPD)</option>
                 </select>
