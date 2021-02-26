@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const Teams = ({dataTable}) => {
   return (
     dataTable.teams.map((team) => {
-      return <option value = {team.id}>{team.name}</option>;
+      return <option key={`${team.id}-${team.name}`} value = {team.id}>{team.name}</option>;
     })
   )
 } 
@@ -12,7 +12,7 @@ const Teams = ({dataTable}) => {
 const Users = ({team}) => {
   return (
     team.members.map((member) => {
-      return <option value = {member.id}>{member.name}</option>
+      return <option key={`${member.id}-${member.name}`} value = {member.id}>{member.name}</option>
     })
   )
 }
@@ -109,31 +109,31 @@ export default class Modal extends Component {
               </div>
               <div className="vacation-form__row">
                 <p className="vacation-form__subtitle">Team</p>
-                <select className="vacation-form__select" onChange = {(e) => {this.setState({selectedTeam : e.target.value})}}>
-                  <option value = "" disabled hidden>Team name</option>
+                <select className="vacation-form__select" defaultValue={'default'} onChange = {(e) => {this.setState({selectedTeam : e.target.value})}}>
+                  <option value='default' hidden>Team name</option>
                   <Teams dataTable = {this.props.dataTable}/>
                 </select>
               </div>
               <div className="vacation-form__row">
                 <p className="vacation-form__subtitle">User</p>
-                <select className="vacation-form__select" onChange = {(e) => {this.setState({selectedUser : e.target.value})}}>
-                {(!this.state.selectedTeam) && <option value="" selected>User name</option>}
+                <select className="vacation-form__select" defaultValue={'default'} onChange = {(e) => {this.setState({selectedUser : e.target.value})}}>
+                {(!this.state.selectedTeam) && <option value='default' hidden>User name</option>}
                   {(this.state.selectedTeam) && <Users team = {this.getTeam()}/>}
                 </select>
               </div>
               <div className="vacation-form__row">
                 <p className="vacation-form__subtitle">Vac Type</p>
-                <select className="vacation-form__select" onChange = {(e) => {this.setState({type : e.target.value})}}>
-                  <option value = "" disabled hidden>Type</option>
+                <select className="vacation-form__select" defaultValue={'default'} onChange={(e) => { this.setState({ type: e.target.value }) }}>
+                  <option value='default' hidden>Type</option>
                   <option value = "Paid">Paid Day Off (PD)</option>
                   <option value = "UnPaid">Unpaid Day Off (UPD)</option>
                 </select>
               </div>
-              <div className="vacation-form__footer">
+              <div className="vacation-form__footer" key='modal-footer'>
                 <button className="vacation-form__btn vacation-form__cancel close_modal" onClick={hideModal}>
                   Cancel
                 </button>
-                <button className="vacation-form__btn vacation-form__send close_modal" onClick={(e) => {this.props.addVacation(e, this.state.selectedTeam, this.state.selectedUser, this.getVacation(e))}}>
+                <button className="vacation-form__btn vacation-form__send close_modal" onClick={(e) => { this.props.addVacation(e, this.state.selectedTeam, this.state.selectedUser, this.getVacation(e)) }}>
                   Send
                 </button>
               </div>
